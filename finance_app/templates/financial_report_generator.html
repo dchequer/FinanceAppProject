@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Financial Report Generator</title>
+</head>
+<body>
+  <h1>Financial Report Generator</h1>
+
+  <form method="post">
+    {% csrf_token %}
+
+    <label for="expenses">Balance sheet data:</label>
+    <textarea id="expenses" name="expenses" rows="10" cols="30" required></textarea>
+
+    <label for="revenue">revenue data:</label>
+    <textarea id="revenue" name="revenue" rows="10" cols="30" required></textarea>
+
+    <button type="submit">Generate report</button>
+  </form>
+
+  {% if financial_report %}
+    <h2>Financial Report:</h2>
+    <pre>{{ financial_report }}</pre>
+  {% endif %}
+
+  <a href="{% url 'home' %}">Home</a>
+  
+</body>
+</html>

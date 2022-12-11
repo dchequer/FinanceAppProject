@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stock Metrics Calculator</title>
+</head>
+<body>
+  <h1>Stock Metrics Calculator</h1>
+
+  <form method="post">
+    {% csrf_token %}
+
+    <label for="price">Price per share:</label>
+    <input type="number" id="price" name="price" step="0.01" required>
+
+    <label for="dividend">Dividend per share:</label>
+    <input type="number" id="dividend" name="dividend" step="0.01" required>
+
+    <label for="rate">Discount rate:</label>
+    <input type="number" id="rate" name="rate" step="0.01" required>
+
+    <button type="submit">Calculate</button>
+  </form>
+
+  {% if dividend_yield %}
+    <p>The dividend yield is: {{ dividend_yield|floatformat:2 }}</p>
+  {% endif %}
+
+  {% if price_earnings_ratio %}
+    <p>The price-earnings ratio is: {{ price_earnings_ratio|floatformat:2 }}</p>
+  {% endif %}
+
+  {% if intrinsic_value %}
+    <p>The intrinsic value is: {{ intrinsic_value|floatformat:2 }}</p>
+  {% endif %}
+
+  <a href="{% url 'home' %}">Home</a>
+  
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Interest Rate Converter</title>
+</head>
+<body>
+  <h1>Interest Rate Converter</h1>
+
+  <form method="post">
+    {% csrf_token %}
+
+    <label for="rate">Interest rate:</label>
+    <input type="number" id="rate" name="rate" step="0.01" required>
+
+    <label for="from_period">From period:</label>
+    <select id="from_period" name="from_period" required>
+      <option value="annual">Annual</option>
+      <option value="semi_annual">Semi-annual</option>
+      <option value="quarterly">Quarterly</option>
+      <option value="monthly">Monthly</option>
+      <option value="weekly">Weekly</option>
+      <option value="daily">Daily</option>
+    </select>
+
+    <label for="to_period">To period:</label>
+    <select id="to_period" name="to_period" required>
+      <option value="annual">Annual</option>
+      <option value="semi_annual">Semi-annual</option>
+      <option value="quarterly">Quarterly</option>
+      <option value="monthly">Monthly</option>
+      <option value="weekly">Weekly</option>
+      <option value="daily">Daily</option>
+    </select>
+
+    <button type="submit">Convert</button>
+  </form>
+
+  {% if converted_rate %}
+    <p>The converted interest rate is: {{ converted_rate|floatformat:2 }}</p>
+  {% endif %}
+
+  <a href="{% url 'home' %}">Home</a>
+  
+</body>
+</html>

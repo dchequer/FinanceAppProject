@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Finance App</title>
+</head>
+<body>
+  <h1>Welcome to the Finance App!</h1>
+  <p>ola te huele la kola</p>
+  <p>Choose from the following finance tasks:</p>
+
+  <ul>
+    <li><a href="{% url 'loan_payment_calculator' %}">Loan payment calculator</a></li>
+    <li><a href="{% url 'compound_interest_calculator' %}">Compound interest calculator</a></li>
+    <li><a href="{% url 'interest_rate_converter' %}">Interest rate converter</a></li>
+    <li><a href="{% url 'present_value_calculator' %}">Present value calculator</a></li>
+    <li><a href="{% url 'stock_metrics_calculator' %}">Stock metrics calculator</a></li>
+    <li><a href="{% url 'financial_report_generator' %}">Financial report generator</a></li>
+  </ul>
+</body>
+</html>

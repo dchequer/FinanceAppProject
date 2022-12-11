@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Loan Payment Calculator</title>
+</head>
+<body>
+  <h1>Loan Payment Calculator</h1>
+
+  <form method="post">
+    {% csrf_token %}
+
+    <label for="loan_amount">Loan amount:</label>
+    <input type="number" id="loan_amount" name="loan_amount" step="0.01" required>
+
+    <label for="interest_rate">Interest rate:</label>
+    <input type="number" id="interest_rate" name="interest_rate" step="0.01" required>
+
+    <label for="loan_term">Loan term (in years):</label>
+    <input type="number" id="loan_term" name="loan_term" min="1" required>
+
+    <button type="submit">Calculate</button>
+  </form>
+
+
+  {% if loan_payment %}
+    <p>The monthly loan payment is: {{ loan_payment|floatformat:2 }}</p>
+  {% endif %}
+
+  <a href="{% url 'home' %}">Home</a>
+</body>
+</html>
