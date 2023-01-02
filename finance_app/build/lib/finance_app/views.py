@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.http.request import HttpRequest
 from src import finance_utilities as finance
+from src import countDots as dots
 
 def home(request: HttpRequest) -> HttpResponse:
   return render(request, 'home.html')
@@ -110,11 +111,15 @@ def future_value_calculator(request: HttpRequest) -> HttpResponse:
 
 def financial_report_generator(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
-        income_statement = request.POST['income_statement']
-        balance_sheet = request.POST['balance_sheet']
-        cash_flow_statement = request.POST['cash_flow_statement']
-    
-        financial_report = finance.generate_financial_report(income_statement, balance_sheet, cash_flow_statement)
+        revenue = request.POST['revenue']
+        #print(revenue)
+        expenses = request.POST['expenses']
+
+        financial_report = finance.generate_financial_report(
+            {
+                'revenue': revenue, 
+                'expenses': expenses
+            })
     
         context = {
         'financial_report': financial_report
@@ -124,3 +129,18 @@ def financial_report_generator(request: HttpRequest) -> HttpResponse:
     
     else:
         return render(request, 'financial_report_generator.html')
+
+def domino_counter(request: HttpRequest) -> HttpResponse:
+    if request.method == 'POST':
+        image = request.POST['image']
+
+        domino_count = dots(image)
+        context = {
+        'domino_counter': domino_count
+        }
+    
+        return render(request, 'domino_counter.html', context)
+    
+    else:
+        return render(request, 'domino_counter.html')
+        

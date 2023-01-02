@@ -46,4 +46,8 @@ urlpatterns = [
     # Financial report generator
     path('financial-report-generator', views.financial_report_generator,
          name='financial_report_generator'),
+     
+     #Domino Counter
+     path('domino-counter', views.domino_counter,
+          name='domino_counter')
 ]

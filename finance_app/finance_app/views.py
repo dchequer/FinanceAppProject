@@ -2,6 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.http.request import HttpRequest
 from src import finance_utilities as finance
+from src import countDots as dots
+from base64 import b64encode
 
 def home(request: HttpRequest) -> HttpResponse:
   return render(request, 'home.html')
@@ -128,3 +130,22 @@ def financial_report_generator(request: HttpRequest) -> HttpResponse:
     
     else:
         return render(request, 'financial_report_generator.html')
+
+def domino_counter(request: HttpRequest) -> HttpResponse:
+    if request.method == 'POST':
+        src = request.FILES['image']
+        imgBytes = src.read()
+        domino_count, circled_dominoes = dots.countDots(imgBytes)
+
+        imageBytesAsBase64 = b64encode(circled_dominoes).decode('utf-8')
+        dataURI = f'data:image/png;base64,{imageBytesAsBase64}'
+
+        context = {
+        'domino_count': domino_count,
+        'output_image': dataURI
+        }
+        return render(request, 'domino_counter.html', context)
+    
+    else:
+        return render(request, 'domino_counter.html')
+        

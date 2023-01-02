@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Domino Counter</title>
+</head>
+    <body>
+        <h1>Domino Counter</h1>
+
+        <p>Submit a picture or take your own</p>
+
+        <form method="post", enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <label for="image">Image:</label>
+            <input type="file" id="image" name="image" required>
+
+            <button type="submit">Submit</button>
+        </form>
+
+
+        {% if domino_count or output_image%}
+            <p>The number of dominos is: {{ domino_count }}</p>
+            <img src="{{ output_image }}" alt="Domino with circled pips">
+        {% else %}
+            <p>Could not process image</p>
+        {% endif %}
+        <p></p>
+        <a href="{% url 'home' %}">Back to home</a>
+
+    </body>
+
+
+
+
+
+
+
+</html>
